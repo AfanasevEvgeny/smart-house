@@ -1,0 +1,39 @@
+[
+  {
+    "name": "My home",
+    "id": 0,
+    "devices": [
+      {
+        "name": "Fridge",
+        "dimmable": false,
+        "state": true
+      },
+      {
+        "name": "Sensor",
+        "dimmable": false,
+        "state": false
+      },
+      {
+        "name": "Kitchen light",
+        "dimmable": true,
+        "state": 2
+      }
+    ]
+  },
+  {
+    "name": "My apartment",
+    "id": 1,
+    "devices": [
+      {
+        "name": "Fridge",
+        "dimmable": false,
+        "state": false
+      },
+      {
+        "name": "Sensor",
+        "dimmable": false,
+        "state": false
+      }
+    ]
+  }
+]
