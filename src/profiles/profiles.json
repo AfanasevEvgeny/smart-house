@@ -17,6 +17,16 @@
         "name": "Kitchen light",
         "dimmable": true,
         "state": 2
+      },
+      {
+        "name": "Watter heater",
+        "dimmable": true,
+        "state": 7
+      },
+      {
+        "name": "Garage",
+        "dimmable": false,
+        "state": false
       }
     ]
   },
@@ -30,7 +40,7 @@
         "state": false
       },
       {
-        "name": "Sensor",
+        "name": "Alarm",
         "dimmable": false,
         "state": false
       }
