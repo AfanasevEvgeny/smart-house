@@ -41,7 +41,8 @@ export default {
 }
 
 .home-bar-container {
-  display: grid;
-  grid-template-columns: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>

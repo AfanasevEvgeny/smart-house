@@ -20,11 +20,11 @@
         </h4>
       </div>
       <div class="device-options-wrapper">
-        <label v-if="!device.dimmable" class="switch">
-          <input type="checkbox" name="power" v-model="device.state">
+        <label v-if="!device.dimmable">
+          <input type="checkbox" :label="'power'" v-model="device.state">
         </label>
         <div v-else>
-          <input type="number" name="power" v-model="device.state">
+          <MyInput label="Device value" type="number" :value="device.state" @input="changeStateDimmable"/>
         </div>
       </div>
       <div style="text-align: center">
@@ -33,9 +33,9 @@
                   style="margin: 0.6rem"
         />
         <MyButton
-            @click="removeDevice"
-            text="Remove Device"
-            background="a52a2a"
+          @click="removeDevice"
+          text="Remove Device"
+          background="a52a2a"
         />
       </div>
     </div>
@@ -44,10 +44,12 @@
 
 <script>
 import MyButton from "@/components/ui/MyButton";
+import MyNumberInput from "@/components/ui/MyInput";
+import MyInput from "@/components/ui/MyInput";
 
 export default {
   name: "DeviceCard",
-  components: {MyButton},
+  components: {MyInput, MyNumberInput, MyButton},
   data() {
     return {
       initialState: this.device.state
@@ -62,6 +64,10 @@ export default {
     },
     removeDevice() {
       this.$emit('remove-device')
+    },
+    changeStateDimmable(val) {
+      console.log(val)
+      this.device.state = val
     }
   }
 }
@@ -92,15 +98,6 @@ export default {
   justify-content: center;
 }
 
-.turn-off-state {
-  color: firebrick;
-}
-
-.turn-on-state {
-  color: #569360;
-}
-
-
 input[type=checkbox] {
   /* Double-sized Checkboxes */
   -ms-transform: scale(2); /* IE */
@@ -110,6 +107,15 @@ input[type=checkbox] {
   transform: scale(2);
   padding: 10px;
 }
+
+.turn-off-state {
+  color: firebrick;
+}
+
+.turn-on-state {
+  color: #569360;
+}
+
 
 
 </style>

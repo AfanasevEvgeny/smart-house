@@ -5,7 +5,12 @@
         <div>
           <form>
             <label>Device Name </label>
-            <input type="text" v-model="session.deviceName" style="margin-right: 1rem">
+            <MyInput label="Device value"
+                     type="text"
+                     :value="session.deviceName"
+                     @input="changeDeviceName"
+                     style="margin-right: 1rem"
+            />
             <label style="margin-right: 0.6rem">Dimmable </label>
             <input type="checkbox" v-model="session.isDimmable">
           </form>
@@ -18,19 +23,19 @@
         </div>
         <div>
           <MyButton
-              v-if="session.deviceName"
-              @click="addDevice"
-              text="Add"
-              background="008b8b"
+            v-if="session.deviceName"
+            @click="addDevice"
+            text="Add"
+            background="008b8b"
           />
         </div>
       </div>
     </div>
     <MyButton
-        v-else
-        text="Add device"
-        @click="initiateSession"
-        background="008b8b"
+      v-else
+      text="Add device"
+      @click="initiateSession"
+      background="008b8b"
     />
   </div>
 </template>
@@ -38,10 +43,11 @@
 <script>
 import MyButton from "@/components/ui/MyButton";
 import {mapMutations} from 'vuex'
+import MyInput from "@/components/ui/MyInput";
 
 export default {
   name: "AddDevice",
-  components: {MyButton},
+  components: {MyInput, MyButton},
   props: {
     houseId: String,
   },
@@ -60,14 +66,14 @@ export default {
     },
     addDevice() {
       this.$store.commit('addDevice',
-          {
-            houseId: this.houseId,
-            newDevice: {
-              name: this.session.deviceName,
-              dimmable: this.session.isDimmable,
-              state: this.session.isDimmable ? 0 : false
-            }
+        {
+          houseId: this.houseId,
+          newDevice: {
+            name: this.session.deviceName,
+            dimmable: this.session.isDimmable,
+            state: this.session.isDimmable ? 0 : false
           }
+        }
       )
       this.closeSession()
     },
@@ -75,10 +81,13 @@ export default {
       this.session.state = false
       this.session.deviceName = ''
       this.session.isDimmable = false
+    },
+    changeDeviceName(val) {
+      this.session.deviceName = val
     }
   },
   watch: {
-    houseId(){
+    houseId() {
       this.closeSession()
     }
   }
@@ -90,7 +99,6 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .add-device-form div {
