@@ -1,12 +1,12 @@
 <template>
   <nav class="navigation-bar">
     <router-link
-        v-for="house in housesIdNavLinks"
-        :key="house.id"
-        :to="`/${house.id}`"
-        :class="{
+      v-for="house in housesIdNavLinks"
+      :key="house.id"
+      :to="`/${house.id}`"
+      :class="{
           'home-link':true,
-          'home-link-active': $route.params.id === [house.id].toString()
+          'home-link-active': currentHouseId === house.id.toString()
         }"
     >
       {{ house.name }}
@@ -22,7 +22,20 @@ export default {
   computed: {
     ...mapGetters({
       housesIdNavLinks: 'housesIdNavLinks'
-    })
+    }),
+    currentHouseId() {
+      return this.$route.params.id
+    }
+  },
+  watch: {
+    currentHouseId: {
+      immediate: true,
+      handler() {
+        if (!this.housesIdNavLinks.find(houseLink => houseLink.id === +this.currentHouseId)) {
+          this.$router.push("/").catch(()=>{});
+        }
+      }
+    }
   }
 }
 </script>
